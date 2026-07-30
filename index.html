@@ -10,15 +10,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#16140f;
-    --ink-2:#1f1c15;
-    --bone:#eee7d9;
-    --bone-dim:#c9c2b2;
+    --ink:#ffffff;
+    --ink-2:#f4f2ed;
+    --bone:#121110;
+    --bone-dim:#57534a;
     --red:#b8271f;
     --red-dark:#7a1a15;
-    --gold:#c89b3c;
+    --gold:#a9822f;
     --gray:#8a8579;
-    --border:rgba(238,231,217,0.14);
+    --border:rgba(15,13,10,0.14);
+    --dark-text:#121110;
+    --light-text:#ffffff;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
@@ -43,15 +45,15 @@
   .tape-divider .line{flex:1; height:1px; background:var(--border);}
   .tape-divider .tag{
     font-family:'Oswald', sans-serif; font-weight:600; letter-spacing:0.18em;
-    font-size:12px; text-transform:uppercase; color:var(--ink);
-    background:var(--gold); padding:6px 14px; transform:skewX(-8deg);
+    font-size:12px; text-transform:uppercase; color:var(--light-text);
+    background:var(--bone); padding:6px 14px; transform:skewX(-8deg);
   }
   .tape-divider .tag span{display:inline-block; transform:skewX(8deg);}
 
   /* Header */
   header{
     position:sticky; top:0; z-index:50;
-    background:rgba(22,20,15,0.92); backdrop-filter:blur(6px);
+    background:rgba(255,255,255,0.92); backdrop-filter:blur(6px);
     border-bottom:1px solid var(--border);
   }
   .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 28px;}
@@ -60,7 +62,7 @@
     width:40px; height:40px; border-radius:50%;
     background:var(--ink-2); display:flex; align-items:center; justify-content:center;
     flex-shrink:0; overflow:hidden; border:1px solid var(--border);
-    box-shadow:0 3px 10px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(238,231,217,0.05);
+    box-shadow:0 3px 14px rgba(0,0,0,0.14), inset 0 0 0 1px rgba(0,0,0,0.05);
   }
   .brand-mark img{width:100%; height:100%; object-fit:cover;}
   .brand-name{font-family:'Oswald', sans-serif; font-weight:600; font-size:14.5px; letter-spacing:0.03em;}
@@ -68,17 +70,19 @@
   .nav-cta{
     font-family:'Oswald', sans-serif; font-weight:600; font-size:13px; letter-spacing:0.06em;
     text-transform:uppercase; text-decoration:none;
-    border:1px solid var(--gold); color:var(--gold); padding:10px 20px;
+    border:1px solid var(--bone); color:var(--bone); padding:10px 20px;
     transition:background 0.15s ease, color 0.15s ease;
   }
-  .nav-cta:hover{background:var(--gold); color:var(--ink);}
+  .nav-cta:hover{background:var(--bone); color:var(--light-text);}
 
   /* Hero */
   .hero{
     position:relative; padding:96px 0 90px; overflow:hidden;
     background:
-      linear-gradient(180deg, rgba(22,20,15,0.55) 0%, rgba(22,20,15,0.88) 65%, var(--ink) 100%),
-      radial-gradient(ellipse at 30% 20%, rgba(184,39,31,0.18), transparent 55%);
+      radial-gradient(ellipse at 78% 10%, rgba(184,39,31,0.05), transparent 45%),
+      radial-gradient(ellipse at 15% 85%, rgba(0,0,0,0.04), transparent 50%),
+      var(--ink);
+    border-bottom:1px solid var(--border);
   }
   .hero-grid{
     display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center;
@@ -92,8 +96,8 @@
     text-transform:uppercase; text-decoration:none; padding:16px 30px;
     display:inline-block; border:1px solid transparent; transition:transform 0.15s ease, opacity 0.15s ease;
   }
-  .btn-primary{background:var(--red); color:var(--bone);}
-  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--bone); color:var(--light-text);}
+  .btn-primary:hover{transform:translateY(-2px); opacity:0.88;}
   .btn-ghost{border-color:var(--border); color:var(--bone);}
   .btn-ghost:hover{border-color:var(--bone-dim);}
 
@@ -106,9 +110,9 @@
     width:150px; height:150px; border-radius:50%; overflow:hidden;
     border:2px solid rgba(200,155,60,0.5);
     box-shadow:
-      0 25px 50px rgba(0,0,0,0.6),
-      0 0 60px rgba(184,39,31,0.25),
-      inset 0 0 0 6px rgba(22,20,15,0.5);
+      0 25px 50px rgba(0,0,0,0.22),
+      0 0 50px rgba(184,39,31,0.12),
+      inset 0 0 0 6px rgba(0,0,0,0.35);
     animation:emblem-float 6s ease-in-out infinite;
     transform-style:preserve-3d;
   }
@@ -220,8 +224,8 @@
   .wheel-fade-top, .wheel-fade-bottom{
     position:absolute; left:0; right:0; height:64px; pointer-events:none; z-index:2;
   }
-  .wheel-fade-top{top:0; background:linear-gradient(var(--ink-2), rgba(31,28,21,0));}
-  .wheel-fade-bottom{bottom:0; background:linear-gradient(rgba(31,28,21,0), var(--ink-2));}
+  .wheel-fade-top{top:0; background:linear-gradient(var(--ink-2), rgba(244,242,237,0));}
+  .wheel-fade-bottom{bottom:0; background:linear-gradient(rgba(244,242,237,0), var(--ink-2));}
 
   .booking-form{background:var(--ink); padding:44px 38px;}
   .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
@@ -235,7 +239,7 @@
   input:focus, select:focus, textarea:focus{outline:none; border-color:var(--gold);}
   textarea{resize:vertical; min-height:80px;}
   .submit-btn{
-    width:100%; margin-top:8px; background:var(--red); color:var(--bone); border:none;
+    width:100%; margin-top:8px; background:var(--bone); color:var(--light-text); border:none;
     font-family:'Oswald', sans-serif; font-weight:600; font-size:14.5px; letter-spacing:0.05em;
     text-transform:uppercase; padding:17px; cursor:pointer; transition:opacity 0.15s ease;
   }
@@ -262,7 +266,7 @@
 <header>
   <div class="nav">
     <div class="brand">
-      <div class="brand-mark"><img src="assets/logo.jpeg" alt="Lion Team Ialoveni"></div>
+      <div class="brand-mark"><img src="logo.jpeg" alt="Lion Team Ialoveni"></div>
       <div class="brand-name">Lion Team<small>Ialoveni</small></div>
     </div>
     <a href="#rezervare" class="nav-cta">Rezervă</a>
@@ -271,7 +275,7 @@
 
 <section class="hero">
   <div class="hero-emblem-wrap">
-    <div class="hero-emblem"><img src="assets/logo.jpeg" alt="Lion Team Ialoveni"></div>
+    <div class="hero-emblem"><img src="logo.jpeg" alt="Lion Team Ialoveni"></div>
   </div>
   <div class="wrap">
     <div class="hero-grid">
@@ -512,7 +516,7 @@
 <footer>
   <div class="wrap foot-row">
     <div class="brand">
-      <div class="brand-mark" style="width:28px; height:28px;"><img src="assets/logo.jpeg" alt="Lion Team Ialoveni"></div>
+      <div class="brand-mark" style="width:28px; height:28px;"><img src="logo.jpeg" alt="Lion Team Ialoveni"></div>
       <div class="brand-name">Lion Team Ialoveni <small style="display:inline; margin-left:6px;">© 2026 · Antrenor Ian Chirilov</small></div>
     </div>
     <a href="https://www.instagram.com/chirilov_ian" target="_blank" rel="noopener">Instagram</a>
