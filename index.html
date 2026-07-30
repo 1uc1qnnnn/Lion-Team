@@ -57,10 +57,12 @@
   .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 28px;}
   .brand{display:flex; align-items:center; gap:10px;}
   .brand-mark{
-    width:34px; height:34px; border-radius:50%;
-    background:var(--red); display:flex; align-items:center; justify-content:center;
-    font-family:'Anton', sans-serif; font-size:16px; color:var(--bone); flex-shrink:0;
+    width:40px; height:40px; border-radius:50%;
+    background:var(--ink-2); display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; overflow:hidden; border:1px solid var(--border);
+    box-shadow:0 3px 10px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(238,231,217,0.05);
   }
+  .brand-mark img{width:100%; height:100%; object-fit:cover;}
   .brand-name{font-family:'Oswald', sans-serif; font-weight:600; font-size:14.5px; letter-spacing:0.03em;}
   .brand-name small{display:block; font-size:10.5px; color:var(--bone-dim); font-weight:500; letter-spacing:0.14em; text-transform:uppercase;}
   .nav-cta{
@@ -95,8 +97,33 @@
   .btn-ghost{border-color:var(--border); color:var(--bone);}
   .btn-ghost:hover{border-color:var(--bone-dim);}
 
+  /* 3D floating emblem in hero */
+  .hero-emblem-wrap{
+    position:absolute; top:70px; right:6%; z-index:1;
+    perspective:900px; display:none;
+  }
+  .hero-emblem{
+    width:150px; height:150px; border-radius:50%; overflow:hidden;
+    border:2px solid rgba(200,155,60,0.5);
+    box-shadow:
+      0 25px 50px rgba(0,0,0,0.6),
+      0 0 60px rgba(184,39,31,0.25),
+      inset 0 0 0 6px rgba(22,20,15,0.5);
+    animation:emblem-float 6s ease-in-out infinite;
+    transform-style:preserve-3d;
+  }
+  .hero-emblem img{width:100%; height:100%; object-fit:cover;}
+  @keyframes emblem-float{
+    0%, 100%{transform:rotateY(-8deg) rotateX(4deg) translateY(0px);}
+    50%{transform:rotateY(8deg) rotateX(-2deg) translateY(-14px);}
+  }
+  @media (min-width:860px){ .hero-emblem-wrap{display:block;} }
+
   .hero-stat-card{
     border:1px solid var(--border); background:var(--ink-2); padding:30px;
+    transform-style:preserve-3d; transition:transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow:0 20px 40px rgba(0,0,0,0.35);
+    will-change:transform;
   }
   .hero-stat-card .round-badge{
     display:flex; align-items:center; gap:10px; margin-bottom:22px;
@@ -115,8 +142,19 @@
   .rounds{padding:100px 0;}
   .section-head{max-width:60ch; margin-bottom:56px;}
   .section-head h2{font-size:clamp(30px, 4vw, 44px); margin-top:12px;}
-  .round-list{display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--border); border:1px solid var(--border);}
-  .round-item{background:var(--ink); padding:38px 30px;}
+  .round-list{display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--border); border:1px solid var(--border); perspective:1200px;}
+  .round-item{
+    background:var(--ink); padding:38px 30px; position:relative;
+    transform-style:preserve-3d; transition:transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    will-change:transform;
+  }
+  .round-item:hover{background:var(--ink-2); box-shadow:0 22px 40px rgba(0,0,0,0.45); z-index:2;}
+  .round-item::after{
+    content:''; position:absolute; inset:0; pointer-events:none; opacity:0;
+    background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(200,155,60,0.10), transparent 60%);
+    transition:opacity 0.25s ease;
+  }
+  .round-item:hover::after{opacity:1;}
   .round-num{font-family:'Anton', sans-serif; font-size:15px; color:var(--red); margin-bottom:20px; display:flex; align-items:baseline; gap:8px;}
   .round-num .r{color:var(--bone-dim); font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase;}
   .round-item h3{font-family:'Oswald', sans-serif; font-size:19px; font-weight:600; margin-bottom:12px;}
@@ -151,6 +189,39 @@
   .price-tag{margin-top:28px; padding-top:24px; border-top:1px solid var(--border);}
   .price-tag .amount{font-family:'Anton', sans-serif; font-size:40px; color:var(--gold);}
   .price-tag .unit{font-size:13px; color:var(--bone-dim);}
+
+  /* Time wheel picker */
+  .wheel-field{position:relative;}
+  .wheel{
+    position:relative; height:168px; overflow-y:auto; scroll-snap-type:y mandatory;
+    background:
+      linear-gradient(var(--ink-2), var(--ink-2)) padding-box;
+    border:1px solid var(--border);
+    -ms-overflow-style:none; scrollbar-width:none;
+    perspective:600px;
+  }
+  .wheel::-webkit-scrollbar{display:none;}
+  .wheel-pad{height:64px; flex-shrink:0;}
+  .wheel-track{display:flex; flex-direction:column;}
+  .wheel-option{
+    height:40px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+    scroll-snap-align:center; font-family:'Anton', sans-serif; font-size:20px;
+    color:var(--bone-dim); opacity:0.35; transform:scale(0.85);
+    transition:opacity 0.15s ease, transform 0.15s ease, color 0.15s ease;
+    cursor:pointer; user-select:none;
+  }
+  .wheel-option.active{opacity:1; color:var(--gold); transform:scale(1.12);}
+  .wheel-highlight{
+    position:absolute; top:50%; left:0; right:0; height:40px; margin-top:-20px;
+    border-top:1px solid rgba(200,155,60,0.5); border-bottom:1px solid rgba(200,155,60,0.5);
+    background:linear-gradient(90deg, rgba(200,155,60,0.06), transparent 20%, transparent 80%, rgba(200,155,60,0.06));
+    pointer-events:none;
+  }
+  .wheel-fade-top, .wheel-fade-bottom{
+    position:absolute; left:0; right:0; height:64px; pointer-events:none; z-index:2;
+  }
+  .wheel-fade-top{top:0; background:linear-gradient(var(--ink-2), rgba(31,28,21,0));}
+  .wheel-fade-bottom{bottom:0; background:linear-gradient(rgba(31,28,21,0), var(--ink-2));}
 
   .booking-form{background:var(--ink); padding:44px 38px;}
   .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
@@ -191,7 +262,7 @@
 <header>
   <div class="nav">
     <div class="brand">
-      <div class="brand-mark">LT</div>
+      <div class="brand-mark"><img src="assets/logo.jpeg" alt="Lion Team Ialoveni"></div>
       <div class="brand-name">Lion Team<small>Ialoveni</small></div>
     </div>
     <a href="#rezervare" class="nav-cta">Rezervă</a>
@@ -199,6 +270,9 @@
 </header>
 
 <section class="hero">
+  <div class="hero-emblem-wrap">
+    <div class="hero-emblem"><img src="assets/logo.jpeg" alt="Lion Team Ialoveni"></div>
+  </div>
   <div class="wrap">
     <div class="hero-grid">
       <div>
@@ -297,14 +371,27 @@
             <div class="field"><label for="data">Data antrenamentului</label><input type="date" id="data" name="data" required></div>
           </div>
           <div class="form-row">
-            <div class="field full">
-              <label for="ora">Ora (ședință de 60 min)</label>
-              <select id="ora" name="ora" required>
-                <option value="">Alege ora</option>
-                <option>10:00</option><option>11:00</option><option>12:00</option>
-                <option>13:00</option><option>14:00</option><option>15:00</option>
-                <option>16:00</option><option>17:00</option><option>18:00</option>
-              </select>
+            <div class="field full wheel-field">
+              <label>Ora (ședință de 60 min)</label>
+              <div class="wheel" id="ora-wheel">
+                <div class="wheel-highlight"></div>
+                <div class="wheel-fade-top"></div>
+                <div class="wheel-fade-bottom"></div>
+                <div class="wheel-track" id="ora-track">
+                  <div class="wheel-pad"></div>
+                  <div class="wheel-option" data-value="10:00">10:00</div>
+                  <div class="wheel-option" data-value="11:00">11:00</div>
+                  <div class="wheel-option" data-value="12:00">12:00</div>
+                  <div class="wheel-option" data-value="13:00">13:00</div>
+                  <div class="wheel-option" data-value="14:00">14:00</div>
+                  <div class="wheel-option" data-value="15:00">15:00</div>
+                  <div class="wheel-option" data-value="16:00">16:00</div>
+                  <div class="wheel-option" data-value="17:00">17:00</div>
+                  <div class="wheel-option" data-value="18:00">18:00</div>
+                  <div class="wheel-pad"></div>
+                </div>
+              </div>
+              <input type="hidden" id="ora" name="ora" required>
             </div>
           </div>
           <div class="field full" style="margin-bottom:16px;">
@@ -320,6 +407,70 @@
 </section>
 
 <script>
+  // --- Selector oră tip roată ---
+  const wheel = document.getElementById('ora-wheel');
+  const oraInput = document.getElementById('ora');
+  const options = Array.from(document.querySelectorAll('.wheel-option'));
+  const OPT_HEIGHT = 40;
+
+  function updateActive() {
+    const center = wheel.scrollTop + wheel.clientHeight / 2;
+    let closest = null;
+    let closestDist = Infinity;
+    options.forEach(opt => {
+      const optCenter = opt.offsetTop + OPT_HEIGHT / 2;
+      const dist = Math.abs(optCenter - center);
+      if (dist < closestDist) { closestDist = dist; closest = opt; }
+      const norm = Math.min(dist / 60, 1);
+      opt.style.opacity = String(1 - norm * 0.65);
+      opt.style.transform = `scale(${1.12 - norm * 0.27})`;
+    });
+    options.forEach(o => o.classList.toggle('active', o === closest));
+    if (closest) oraInput.value = closest.dataset.value;
+  }
+
+  let scrollTimeout;
+  wheel.addEventListener('scroll', () => {
+    updateActive();
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const active = document.querySelector('.wheel-option.active');
+      if (active) wheel.scrollTo({ top: active.offsetTop - wheel.clientHeight / 2 + OPT_HEIGHT / 2, behavior: 'smooth' });
+    }, 120);
+  });
+
+  options.forEach(opt => {
+    opt.addEventListener('click', () => {
+      wheel.scrollTo({ top: opt.offsetTop - wheel.clientHeight / 2 + OPT_HEIGHT / 2, behavior: 'smooth' });
+    });
+  });
+
+  // Start centered on the first option (10:00)
+  window.addEventListener('load', () => {
+    wheel.scrollTop = options[0].offsetTop - wheel.clientHeight / 2 + OPT_HEIGHT / 2;
+    updateActive();
+  });
+
+  // --- Înclinare 3D pe hover pentru cardurile de runde și panoul de statistici ---
+  function attachTilt(el, intensity = 10) {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      const rotateY = (x - 0.5) * intensity;
+      const rotateX = (0.5 - y) * intensity;
+      el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(4px)`;
+      el.style.setProperty('--mx', `${x * 100}%`);
+      el.style.setProperty('--my', `${y * 100}%`);
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+    });
+  }
+  document.querySelectorAll('.round-item').forEach(el => attachTilt(el, 8));
+  const statCard = document.querySelector('.hero-stat-card');
+  if (statCard) attachTilt(statCard, 6);
+
   const form = document.getElementById('booking-form');
   const btn = document.getElementById('submit-btn');
   const note = document.getElementById('form-note');
@@ -361,7 +512,7 @@
 <footer>
   <div class="wrap foot-row">
     <div class="brand">
-      <div class="brand-mark" style="width:28px; height:28px; font-size:13px;">LT</div>
+      <div class="brand-mark" style="width:28px; height:28px;"><img src="assets/logo.jpeg" alt="Lion Team Ialoveni"></div>
       <div class="brand-name">Lion Team Ialoveni <small style="display:inline; margin-left:6px;">© 2026 · Antrenor Ian Chirilov</small></div>
     </div>
     <a href="https://www.instagram.com/chirilov_ian" target="_blank" rel="noopener">Instagram</a>
