@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lion Team Ialoveni · Antrenamente kickboxing cu Ian Chirilov</title>
+<meta name="description" content="Rezervă online un antrenament 1-la-1 de kickboxing K1 cu antrenorul Ian Chirilov în Ialoveni. Ședință de 60 de minute.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16140f;
+    --ink-2:#1f1c15;
+    --bone:#eee7d9;
+    --bone-dim:#c9c2b2;
+    --red:#b8271f;
+    --red-dark:#7a1a15;
+    --gold:#c89b3c;
+    --gray:#8a8579;
+    --border:rgba(238,231,217,0.14);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--bone);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .display{font-family:'Anton', sans-serif; font-weight:400; letter-spacing:0.5px; text-transform:uppercase;}
+  .eyebrow{font-family:'Oswald', sans-serif; font-weight:600; letter-spacing:0.22em; text-transform:uppercase; font-size:12.5px; color:var(--gold);}
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px;}
+
+  /* Corner-tape divider — signature element */
+  .tape-divider{
+    display:flex; align-items:center; gap:14px;
+    margin:0 0 46px;
+  }
+  .tape-divider .line{flex:1; height:1px; background:var(--border);}
+  .tape-divider .tag{
+    font-family:'Oswald', sans-serif; font-weight:600; letter-spacing:0.18em;
+    font-size:12px; text-transform:uppercase; color:var(--ink);
+    background:var(--gold); padding:6px 14px; transform:skewX(-8deg);
+  }
+  .tape-divider .tag span{display:inline-block; transform:skewX(8deg);}
+
+  /* Header */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(22,20,15,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 28px;}
+  .brand{display:flex; align-items:center; gap:10px;}
+  .brand-mark{
+    width:34px; height:34px; border-radius:50%;
+    background:var(--red); display:flex; align-items:center; justify-content:center;
+    font-family:'Anton', sans-serif; font-size:16px; color:var(--bone); flex-shrink:0;
+  }
+  .brand-name{font-family:'Oswald', sans-serif; font-weight:600; font-size:14.5px; letter-spacing:0.03em;}
+  .brand-name small{display:block; font-size:10.5px; color:var(--bone-dim); font-weight:500; letter-spacing:0.14em; text-transform:uppercase;}
+  .nav-cta{
+    font-family:'Oswald', sans-serif; font-weight:600; font-size:13px; letter-spacing:0.06em;
+    text-transform:uppercase; text-decoration:none;
+    border:1px solid var(--gold); color:var(--gold); padding:10px 20px;
+    transition:background 0.15s ease, color 0.15s ease;
+  }
+  .nav-cta:hover{background:var(--gold); color:var(--ink);}
+
+  /* Hero */
+  .hero{
+    position:relative; padding:96px 0 90px; overflow:hidden;
+    background:
+      linear-gradient(180deg, rgba(22,20,15,0.55) 0%, rgba(22,20,15,0.88) 65%, var(--ink) 100%),
+      radial-gradient(ellipse at 30% 20%, rgba(184,39,31,0.18), transparent 55%);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:center;
+  }
+  .hero h1{font-size:clamp(42px, 6.4vw, 74px); line-height:0.98; margin:14px 0 22px;}
+  .hero h1 .accent{color:var(--red);}
+  .hero p.lead{font-size:17px; color:var(--bone-dim); max-width:44ch; margin-bottom:34px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'Oswald', sans-serif; font-weight:600; font-size:14px; letter-spacing:0.05em;
+    text-transform:uppercase; text-decoration:none; padding:16px 30px;
+    display:inline-block; border:1px solid transparent; transition:transform 0.15s ease, opacity 0.15s ease;
+  }
+  .btn-primary{background:var(--red); color:var(--bone);}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border-color:var(--border); color:var(--bone);}
+  .btn-ghost:hover{border-color:var(--bone-dim);}
+
+  .hero-stat-card{
+    border:1px solid var(--border); background:var(--ink-2); padding:30px;
+  }
+  .hero-stat-card .round-badge{
+    display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .round-dot{width:8px; height:8px; border-radius:50%; background:var(--red);}
+  .stat-list{display:flex; flex-direction:column; gap:0;}
+  .stat-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:16px 0; border-bottom:1px solid var(--border);
+  }
+  .stat-row:last-child{border-bottom:none;}
+  .stat-num{font-family:'Anton', sans-serif; font-size:30px; color:var(--gold);}
+  .stat-label{font-size:13px; color:var(--bone-dim); text-align:right; max-width:16ch;}
+
+  /* Rounds section — numbering is meaningful: literal training rounds */
+  .rounds{padding:100px 0;}
+  .section-head{max-width:60ch; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(30px, 4vw, 44px); margin-top:12px;}
+  .round-list{display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--border); border:1px solid var(--border);}
+  .round-item{background:var(--ink); padding:38px 30px;}
+  .round-num{font-family:'Anton', sans-serif; font-size:15px; color:var(--red); margin-bottom:20px; display:flex; align-items:baseline; gap:8px;}
+  .round-num .r{color:var(--bone-dim); font-family:'Oswald',sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase;}
+  .round-item h3{font-family:'Oswald', sans-serif; font-size:19px; font-weight:600; margin-bottom:12px;}
+  .round-item p{font-size:14.5px; color:var(--bone-dim);}
+
+  /* Coach strip */
+  .coach{padding:0 0 100px;}
+  .coach-card{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:0;
+    border:1px solid var(--border);
+  }
+  .coach-photo{
+    background:var(--ink-2); min-height:340px; display:flex; align-items:flex-end; padding:26px;
+    background-size:cover; background-position:center;
+  }
+  .coach-photo-label{
+    font-family:'Oswald', sans-serif; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    background:var(--ink); border:1px solid var(--border); padding:8px 14px; color:var(--bone-dim);
+  }
+  .coach-body{padding:38px; display:flex; flex-direction:column; justify-content:center;}
+  .coach-body h3{font-size:24px; margin-bottom:14px;}
+  .coach-body p{color:var(--bone-dim); font-size:15px; margin-bottom:10px;}
+
+  /* Booking */
+  .booking{padding:0 0 110px;}
+  .booking-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:0; border:1px solid var(--border);}
+  .booking-info{background:var(--ink-2); padding:44px 38px;}
+  .booking-info h3{font-size:24px; margin-bottom:20px;}
+  .info-line{display:flex; gap:12px; padding:14px 0; border-top:1px solid var(--border); font-size:14px; color:var(--bone-dim);}
+  .info-line:first-of-type{border-top:none;}
+  .info-line .k{color:var(--gold); font-family:'Oswald',sans-serif; font-weight:600; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; min-width:96px; flex-shrink:0;}
+  .price-tag{margin-top:28px; padding-top:24px; border-top:1px solid var(--border);}
+  .price-tag .amount{font-family:'Anton', sans-serif; font-size:40px; color:var(--gold);}
+  .price-tag .unit{font-size:13px; color:var(--bone-dim);}
+
+  .booking-form{background:var(--ink); padding:44px 38px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
+  .field{display:flex; flex-direction:column; gap:8px;}
+  .field.full{grid-column:1 / -1;}
+  label{font-family:'Oswald', sans-serif; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--bone-dim);}
+  input, select, textarea{
+    background:var(--ink-2); border:1px solid var(--border); color:var(--bone);
+    padding:13px 14px; font-family:'Work Sans', sans-serif; font-size:14.5px;
+  }
+  input:focus, select:focus, textarea:focus{outline:none; border-color:var(--gold);}
+  textarea{resize:vertical; min-height:80px;}
+  .submit-btn{
+    width:100%; margin-top:8px; background:var(--red); color:var(--bone); border:none;
+    font-family:'Oswald', sans-serif; font-weight:600; font-size:14.5px; letter-spacing:0.05em;
+    text-transform:uppercase; padding:17px; cursor:pointer; transition:opacity 0.15s ease;
+  }
+  .submit-btn:hover{opacity:0.9;}
+  .form-note{font-size:12.5px; color:var(--bone-dim); text-align:center; margin-top:14px;}
+
+  /* Footer */
+  footer{border-top:1px solid var(--border); padding:36px 0;}
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .foot-row .brand-name{font-size:13px;}
+  footer a{color:var(--bone-dim); text-decoration:none; font-size:13px;}
+  footer a:hover{color:var(--gold);}
+
+  @media (max-width: 860px){
+    .hero-grid, .coach-card, .booking-grid{grid-template-columns:1fr;}
+    .round-list{grid-template-columns:1fr;}
+    .form-row{grid-template-columns:1fr;}
+    .coach-photo{min-height:220px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-mark">LT</div>
+      <div class="brand-name">Lion Team<small>Ialoveni</small></div>
+    </div>
+    <a href="#rezervare" class="nav-cta">Rezervă</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">K1 · Kickboxing · Ialoveni</div>
+        <h1 class="display">Antrenează-te<br>cu <span class="accent">Ian Chirilov</span></h1>
+        <p class="lead">Ședințe individuale de 60 de minute, 1-la-1, la Lion Team. Rezervi online, ora intră direct în agenda antrenorului — fără telefoane pierdute.</p>
+        <div class="cta-row">
+          <a href="#rezervare" class="btn btn-primary">Rezervă antrenamentul</a>
+          <a href="https://www.instagram.com/chirilov_ian" class="btn btn-ghost" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div class="hero-stat-card">
+        <div class="round-badge">
+          <div class="round-dot"></div>
+          <span class="eyebrow" style="color:var(--bone-dim);">Program antrenor</span>
+        </div>
+        <div class="stat-list">
+          <div class="stat-row"><span class="stat-num">60</span><span class="stat-label">minute pe ședință</span></div>
+          <div class="stat-row"><span class="stat-num">10–18</span><span class="stat-label">program zilnic, luni–sâmbătă</span></div>
+          <div class="stat-row"><span class="stat-num">1:1</span><span class="stat-label">atenție totală, fără grupe</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rounds">
+  <div class="wrap">
+    <div class="tape-divider"><div class="line"></div><div class="tag"><span>Structura ședinței</span></div><div class="line"></div></div>
+    <div class="section-head">
+      <div class="eyebrow">Ce lucrăm împreună</div>
+      <h2 class="display">Trei runde,<br>un singur obiectiv</h2>
+    </div>
+    <div class="round-list">
+      <div class="round-item">
+        <div class="round-num"><span class="r">Runda</span> 01</div>
+        <h3>Tehnică K1</h3>
+        <p>Lucru individual pe lovituri, gardă, deplasare și combinații adaptate nivelului tău actual.</p>
+      </div>
+      <div class="round-item">
+        <div class="round-num"><span class="r">Runda</span> 02</div>
+        <h3>Condiție fizică</h3>
+        <p>Rezistență, explozie și forță — pregătire reală de sală de kickboxing, nu fitness generic.</p>
+      </div>
+      <div class="round-item">
+        <div class="round-num"><span class="r">Runda</span> 03</div>
+        <h3>Încredere</h3>
+        <p>Autoapărare și disciplină. Pentru începători, amatori și sportivi care se pregătesc de competiții.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="coach">
+  <div class="wrap">
+    <div class="coach-card">
+      <div class="coach-photo" style="background-image:linear-gradient(180deg, rgba(22,20,15,0) 40%, rgba(22,20,15,0.9)), url('https://ianchirilov.lovable.app/assets/gym-hero-9x9fLNf1.jpg');">
+        <span class="coach-photo-label">Lion Team · Sala din Ialoveni</span>
+      </div>
+      <div class="coach-body">
+        <div class="eyebrow">Antrenorul</div>
+        <h3 class="display" style="font-size:26px; margin-top:10px;">Ian Chirilov</h3>
+        <p>Antrenor K1 la Lion Team Ialoveni. Fiecare ședință e construită în jurul unui singur sportiv — tu — nu în jurul unui program fix de grupă.</p>
+        <p>Rezervarea online trimite ora direct în agenda lui; primești un apel de confirmare înainte de antrenament.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="rezervare">
+  <div class="wrap">
+    <div class="tape-divider"><div class="line"></div><div class="tag"><span>Programare</span></div><div class="line"></div></div>
+    <div class="section-head">
+      <div class="eyebrow">Alege ziua și ora</div>
+      <h2 class="display">Rezervă un loc<br>pe saltea</h2>
+    </div>
+    <div class="booking-grid">
+      <div class="booking-info">
+        <h3>Detalii</h3>
+        <div class="info-line"><span class="k">Adresă</span><span>or. Ialoveni, str. Alexandru cel Bun 29</span></div>
+        <div class="info-line"><span class="k">Program</span><span>Luni – Sâmbătă, 10:00 – 18:00</span></div>
+        <div class="info-line"><span class="k">Instagram</span><span><a href="https://www.instagram.com/chirilov_ian" target="_blank" rel="noopener" style="color:var(--gold);">@chirilov_ian</a></span></div>
+        <div class="info-line"><span class="k">Contact</span><span>Apel telefonic după rezervare</span></div>
+        <div class="price-tag">
+          <span class="amount">300</span> <span class="unit">MDL / ședință · plata la sală</span>
+        </div>
+      </div>
+      <div class="booking-form">
+        <form id="booking-form">
+          <div class="form-row">
+            <div class="field"><label for="nume">Nume și prenume</label><input type="text" id="nume" name="nume" required></div>
+            <div class="field"><label for="telefon">Telefon</label><input type="tel" id="telefon" name="telefon" required></div>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="email">Email (opțional)</label><input type="email" id="email" name="email"></div>
+            <div class="field"><label for="data">Data antrenamentului</label><input type="date" id="data" name="data" required></div>
+          </div>
+          <div class="form-row">
+            <div class="field full">
+              <label for="ora">Ora (ședință de 60 min)</label>
+              <select id="ora" name="ora" required>
+                <option value="">Alege ora</option>
+                <option>10:00</option><option>11:00</option><option>12:00</option>
+                <option>13:00</option><option>14:00</option><option>15:00</option>
+                <option>16:00</option><option>17:00</option><option>18:00</option>
+              </select>
+            </div>
+          </div>
+          <div class="field full" style="margin-bottom:16px;">
+            <label for="mesaj">Mesaj (opțional)</label>
+            <textarea id="mesaj" name="mesaj" placeholder="Nivel, obiective, orice vrei să știe antrenorul dinainte"></textarea>
+          </div>
+          <button type="submit" class="submit-btn" id="submit-btn">Rezervă antrenamentul</button>
+          <p class="form-note" id="form-note">Plata la sală · confirmarea vine prin telefon</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('booking-form');
+  const btn = document.getElementById('submit-btn');
+  const note = document.getElementById('form-note');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Se trimite...';
+    note.style.color = 'var(--bone-dim)';
+    note.textContent = 'Plata la sală · confirmarea vine prin telefon';
+
+    const payload = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const res = await fetch('/api/rezervare', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || 'A apărut o eroare.');
+
+      btn.textContent = 'Rezervat!';
+      note.style.color = 'var(--gold)';
+      note.textContent = 'Programarea a fost trimisă. Vei fi contactat telefonic pentru confirmare.';
+      form.reset();
+    } catch (err) {
+      btn.textContent = 'Rezervă antrenamentul';
+      note.style.color = 'var(--red)';
+      note.textContent = err.message || 'Nu am putut trimite programarea. Încearcă din nou.';
+    } finally {
+      btn.disabled = false;
+      setTimeout(() => { btn.textContent = 'Rezervă antrenamentul'; }, 3000);
+    }
+  });
+</script>
+
+<footer>
+  <div class="wrap foot-row">
+    <div class="brand">
+      <div class="brand-mark" style="width:28px; height:28px; font-size:13px;">LT</div>
+      <div class="brand-name">Lion Team Ialoveni <small style="display:inline; margin-left:6px;">© 2026 · Antrenor Ian Chirilov</small></div>
+    </div>
+    <a href="https://www.instagram.com/chirilov_ian" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</footer>
+
+</body>
+</html>

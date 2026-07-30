@@ -1,0 +1,9 @@
+{
+  "name": "lion-team-ialoveni",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site de rezervare pentru antrenamentele K1 cu Ian Chirilov",
+  "dependencies": {
+    "googleapis": "^140.0.0"
+  }
+}
