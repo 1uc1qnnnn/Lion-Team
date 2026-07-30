@@ -10,17 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#ffffff;
-    --ink-2:#f4f2ed;
-    --bone:#121110;
-    --bone-dim:#57534a;
-    --red:#b8271f;
+    --ink:#0a0a09;
+    --ink-2:#161513;
+    --bone:#f5f2ea;
+    --bone-dim:#a39d8f;
+    --red:#c62f26;
     --red-dark:#7a1a15;
-    --gold:#a9822f;
+    --gold:#c89b3c;
     --gray:#8a8579;
-    --border:rgba(15,13,10,0.14);
-    --dark-text:#121110;
-    --light-text:#ffffff;
+    --border:rgba(245,242,234,0.14);
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
@@ -45,7 +43,7 @@
   .tape-divider .line{flex:1; height:1px; background:var(--border);}
   .tape-divider .tag{
     font-family:'Oswald', sans-serif; font-weight:600; letter-spacing:0.18em;
-    font-size:12px; text-transform:uppercase; color:var(--light-text);
+    font-size:12px; text-transform:uppercase; color:var(--ink);
     background:var(--bone); padding:6px 14px; transform:skewX(-8deg);
   }
   .tape-divider .tag span{display:inline-block; transform:skewX(8deg);}
@@ -53,7 +51,7 @@
   /* Header */
   header{
     position:sticky; top:0; z-index:50;
-    background:rgba(255,255,255,0.92); backdrop-filter:blur(6px);
+    background:rgba(10,10,9,0.92); backdrop-filter:blur(6px);
     border-bottom:1px solid var(--border);
   }
   .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 28px;}
@@ -62,7 +60,7 @@
     width:40px; height:40px; border-radius:50%;
     background:var(--ink-2); display:flex; align-items:center; justify-content:center;
     flex-shrink:0; overflow:hidden; border:1px solid var(--border);
-    box-shadow:0 3px 14px rgba(0,0,0,0.14), inset 0 0 0 1px rgba(0,0,0,0.05);
+    box-shadow:0 3px 10px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(245,242,234,0.05);
   }
   .brand-mark img{width:100%; height:100%; object-fit:cover;}
   .brand-name{font-family:'Oswald', sans-serif; font-weight:600; font-size:14.5px; letter-spacing:0.03em;}
@@ -73,14 +71,14 @@
     border:1px solid var(--bone); color:var(--bone); padding:10px 20px;
     transition:background 0.15s ease, color 0.15s ease;
   }
-  .nav-cta:hover{background:var(--bone); color:var(--light-text);}
+  .nav-cta:hover{background:var(--bone); color:var(--ink);}
 
   /* Hero */
   .hero{
     position:relative; padding:96px 0 90px; overflow:hidden;
     background:
-      radial-gradient(ellipse at 78% 10%, rgba(184,39,31,0.05), transparent 45%),
-      radial-gradient(ellipse at 15% 85%, rgba(0,0,0,0.04), transparent 50%),
+      radial-gradient(ellipse at 78% 10%, rgba(184,39,31,0.20), transparent 45%),
+      radial-gradient(ellipse at 15% 85%, rgba(200,155,60,0.08), transparent 50%),
       var(--ink);
     border-bottom:1px solid var(--border);
   }
@@ -96,7 +94,7 @@
     text-transform:uppercase; text-decoration:none; padding:16px 30px;
     display:inline-block; border:1px solid transparent; transition:transform 0.15s ease, opacity 0.15s ease;
   }
-  .btn-primary{background:var(--bone); color:var(--light-text);}
+  .btn-primary{background:var(--bone); color:var(--ink);}
   .btn-primary:hover{transform:translateY(-2px); opacity:0.88;}
   .btn-ghost{border-color:var(--border); color:var(--bone);}
   .btn-ghost:hover{border-color:var(--bone-dim);}
@@ -110,9 +108,9 @@
     width:150px; height:150px; border-radius:50%; overflow:hidden;
     border:2px solid rgba(200,155,60,0.5);
     box-shadow:
-      0 25px 50px rgba(0,0,0,0.22),
-      0 0 50px rgba(184,39,31,0.12),
-      inset 0 0 0 6px rgba(0,0,0,0.35);
+      0 25px 50px rgba(0,0,0,0.6),
+      0 0 60px rgba(184,39,31,0.25),
+      inset 0 0 0 6px rgba(0,0,0,0.5);
     animation:emblem-float 6s ease-in-out infinite;
     transform-style:preserve-3d;
   }
@@ -197,35 +195,44 @@
   /* Time wheel picker */
   .wheel-field{position:relative;}
   .wheel{
-    position:relative; height:168px; overflow-y:auto; scroll-snap-type:y mandatory;
+    position:relative; height:180px; overflow-y:auto; scroll-snap-type:y mandatory;
     background:
       linear-gradient(var(--ink-2), var(--ink-2)) padding-box;
     border:1px solid var(--border);
     -ms-overflow-style:none; scrollbar-width:none;
+    -webkit-overflow-scrolling:touch; touch-action:pan-y; overscroll-behavior:contain;
     perspective:600px;
   }
   .wheel::-webkit-scrollbar{display:none;}
-  .wheel-pad{height:64px; flex-shrink:0;}
+  .wheel-pad{height:70px; flex-shrink:0;}
   .wheel-track{display:flex; flex-direction:column;}
   .wheel-option{
     height:40px; flex-shrink:0; display:flex; align-items:center; justify-content:center;
-    scroll-snap-align:center; font-family:'Anton', sans-serif; font-size:20px;
+    scroll-snap-align:center; scroll-snap-stop:always; font-family:'Anton', sans-serif; font-size:20px;
     color:var(--bone-dim); opacity:0.35; transform:scale(0.85);
     transition:opacity 0.15s ease, transform 0.15s ease, color 0.15s ease;
-    cursor:pointer; user-select:none;
+    cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
   }
   .wheel-option.active{opacity:1; color:var(--gold); transform:scale(1.12);}
   .wheel-highlight{
-    position:absolute; top:50%; left:0; right:0; height:40px; margin-top:-20px;
+    position:absolute; top:50%; left:0; right:0; height:44px; margin-top:-22px;
     border-top:1px solid rgba(200,155,60,0.5); border-bottom:1px solid rgba(200,155,60,0.5);
     background:linear-gradient(90deg, rgba(200,155,60,0.06), transparent 20%, transparent 80%, rgba(200,155,60,0.06));
     pointer-events:none;
   }
   .wheel-fade-top, .wheel-fade-bottom{
-    position:absolute; left:0; right:0; height:64px; pointer-events:none; z-index:2;
+    position:absolute; left:0; right:0; height:70px; pointer-events:none; z-index:2;
   }
-  .wheel-fade-top{top:0; background:linear-gradient(var(--ink-2), rgba(244,242,237,0));}
-  .wheel-fade-bottom{bottom:0; background:linear-gradient(rgba(244,242,237,0), var(--ink-2));}
+  .wheel-fade-top{top:0; background:linear-gradient(var(--ink-2), rgba(22,21,19,0));}
+  .wheel-fade-bottom{bottom:0; background:linear-gradient(rgba(22,21,19,0), var(--ink-2));}
+
+  @media (max-width: 640px){
+    .wheel{height:210px;}
+    .wheel-pad{height:85px;}
+    .wheel-option{height:48px; font-size:22px;}
+    .wheel-highlight{height:48px; margin-top:-24px;}
+    .wheel-fade-top, .wheel-fade-bottom{height:85px;}
+  }
 
   .booking-form{background:var(--ink); padding:44px 38px;}
   .form-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;}
@@ -239,7 +246,7 @@
   input:focus, select:focus, textarea:focus{outline:none; border-color:var(--gold);}
   textarea{resize:vertical; min-height:80px;}
   .submit-btn{
-    width:100%; margin-top:8px; background:var(--bone); color:var(--light-text); border:none;
+    width:100%; margin-top:8px; background:var(--bone); color:var(--ink); border:none;
     font-family:'Oswald', sans-serif; font-weight:600; font-size:14.5px; letter-spacing:0.05em;
     text-transform:uppercase; padding:17px; cursor:pointer; transition:opacity 0.15s ease;
   }
@@ -361,7 +368,7 @@
         <div class="info-line"><span class="k">Instagram</span><span><a href="https://www.instagram.com/chirilov_ian" target="_blank" rel="noopener" style="color:var(--gold);">@chirilov_ian</a></span></div>
         <div class="info-line"><span class="k">Contact</span><span>Apel telefonic după rezervare</span></div>
         <div class="price-tag">
-          <span class="amount">300</span> <span class="unit">MDL / ședință · plata la sală</span>
+          <span class="amount">250</span> <span class="unit">MDL / ședință · plata la sală</span>
         </div>
       </div>
       <div class="booking-form">
@@ -415,22 +422,24 @@
   const wheel = document.getElementById('ora-wheel');
   const oraInput = document.getElementById('ora');
   const options = Array.from(document.querySelectorAll('.wheel-option'));
-  const OPT_HEIGHT = 40;
+  function optHeight() { return options[0].getBoundingClientRect().height; }
 
   function updateActive() {
+    const optH = optHeight();
     const center = wheel.scrollTop + wheel.clientHeight / 2;
     let closest = null;
     let closestDist = Infinity;
     options.forEach(opt => {
-      const optCenter = opt.offsetTop + OPT_HEIGHT / 2;
+      const optCenter = opt.offsetTop + optH / 2;
       const dist = Math.abs(optCenter - center);
       if (dist < closestDist) { closestDist = dist; closest = opt; }
-      const norm = Math.min(dist / 60, 1);
+      const norm = Math.min(dist / (optH * 1.5), 1);
       opt.style.opacity = String(1 - norm * 0.65);
       opt.style.transform = `scale(${1.12 - norm * 0.27})`;
     });
     options.forEach(o => o.classList.toggle('active', o === closest));
     if (closest) oraInput.value = closest.dataset.value;
+    return closest;
   }
 
   let scrollTimeout;
@@ -439,21 +448,23 @@
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
       const active = document.querySelector('.wheel-option.active');
-      if (active) wheel.scrollTo({ top: active.offsetTop - wheel.clientHeight / 2 + OPT_HEIGHT / 2, behavior: 'smooth' });
+      if (active) wheel.scrollTo({ top: active.offsetTop - wheel.clientHeight / 2 + optHeight() / 2, behavior: 'smooth' });
     }, 120);
-  });
+  }, { passive: true });
 
   options.forEach(opt => {
     opt.addEventListener('click', () => {
-      wheel.scrollTo({ top: opt.offsetTop - wheel.clientHeight / 2 + OPT_HEIGHT / 2, behavior: 'smooth' });
+      wheel.scrollTo({ top: opt.offsetTop - wheel.clientHeight / 2 + optHeight() / 2, behavior: 'smooth' });
     });
   });
 
   // Start centered on the first option (10:00)
-  window.addEventListener('load', () => {
-    wheel.scrollTop = options[0].offsetTop - wheel.clientHeight / 2 + OPT_HEIGHT / 2;
+  function centerWheel() {
+    wheel.scrollTop = options[0].offsetTop - wheel.clientHeight / 2 + optHeight() / 2;
     updateActive();
-  });
+  }
+  window.addEventListener('load', centerWheel);
+  window.addEventListener('resize', centerWheel);
 
   // --- Înclinare 3D pe hover pentru cardurile de runde și panoul de statistici ---
   function attachTilt(el, intensity = 10) {
