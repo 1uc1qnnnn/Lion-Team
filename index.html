@@ -548,7 +548,8 @@
     } catch (err) {
       btn.textContent = 'Rezervă antrenamentul';
       note.style.color = 'var(--red)';
-      note.textContent = err.message || 'Nu am putut trimite programarea. Încearcă din nou.';
+      note.textContent = (err && err.name ? err.name + ': ' : '') + (err && err.message ? err.message : 'Eroare necunoscută.');
+      console.error('Eroare la trimiterea rezervării:', err);
     } finally {
       btn.disabled = false;
       setTimeout(() => { btn.textContent = 'Rezervă antrenamentul'; }, 3000);
