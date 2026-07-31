@@ -372,7 +372,7 @@
         </div>
       </div>
       <div class="booking-form">
-        <form id="booking-form">
+        <form id="booking-form" novalidate>
           <div class="form-row">
             <div class="field"><label for="nume">Nume și prenume</label><input type="text" id="nume" name="nume" required></div>
             <div class="field"><label for="telefon">Telefon</label><input type="tel" id="telefon" name="telefon" required></div>
@@ -492,12 +492,44 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    const payload = Object.fromEntries(new FormData(form).entries());
+
+    // Validare proprie, cu mesaje în română, în loc de bula nativă a browserului.
+    if (!payload.nume || !payload.nume.trim()) {
+      note.style.color = 'var(--red)';
+      note.textContent = 'Te rugăm să completezi numele și prenumele.';
+      document.getElementById('nume').focus();
+      return;
+    }
+    if (!payload.telefon || !payload.telefon.trim()) {
+      note.style.color = 'var(--red)';
+      note.textContent = 'Te rugăm să completezi numărul de telefon.';
+      document.getElementById('telefon').focus();
+      return;
+    }
+    if (payload.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email.trim())) {
+      note.style.color = 'var(--red)';
+      note.textContent = 'Adresa de email nu pare corectă. Poți lăsa câmpul gol dacă preferi.';
+      document.getElementById('email').focus();
+      return;
+    }
+    if (!payload.data) {
+      note.style.color = 'var(--red)';
+      note.textContent = 'Te rugăm să alegi o dată pentru antrenament.';
+      document.getElementById('data').focus();
+      return;
+    }
+    if (!payload.ora) {
+      note.style.color = 'var(--red)';
+      note.textContent = 'Te rugăm să alegi o oră, derulând roata de mai sus.';
+      return;
+    }
+
     btn.disabled = true;
     btn.textContent = 'Se trimite...';
     note.style.color = 'var(--bone-dim)';
     note.textContent = 'Plata la sală · confirmarea vine prin telefon';
-
-    const payload = Object.fromEntries(new FormData(form).entries());
 
     try {
       const res = await fetch('/api/rezervare', {
